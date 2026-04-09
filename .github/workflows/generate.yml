@@ -33,16 +33,21 @@ jobs:
 
       - name: Push to Generated Repo
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GH_PAT: ${{ secrets.GH_PAT }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
           git clone https://x-access-token:${{ secrets.GH_PAT }}@github.com/Metsuk1/AP2_Generated.git target_repo
           
-          cp -r gen/go/* target_repo/
+          mkdir -p target_repo/order target_repo/payment
+          
+          cp gen/go/order.pb.go gen/go/order_grpc.pb.go target_repo/order/ 2>/dev/null || true
+          cp gen/go/payment.pb.go gen/go/payment_grpc.pb.go target_repo/payment/ 2>/dev/null || true
           
           cd target_repo
+          rm -f *.pb.go 
+          
           git add .
-          git commit -m "Auto-generate code from ProtocolAP2" || echo "No changes to commit"
+          git commit -m "Organize generated code into packages" || echo "No changes"
           git push origin HEAD:main
