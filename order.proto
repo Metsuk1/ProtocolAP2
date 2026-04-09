@@ -4,7 +4,7 @@ package order;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/Metsuk1/generated-repo/order";
+option go_package = "github.com/Metsuk1/AP2_Generated/order";
 
 service OrderService {
   rpc SubscribeToOrderUpdates (OrderRequest) returns (stream OrderStatusUpdate);

@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package payment;
 
-option go_package = "github.com/Metsuk1/generated-repo/payment";
+option go_package = "github.com/Metsuk1/AP2_Generated/payment";
 
 service PaymentService {
-  rpc ProcessPayment(PaymentRequest)returns (PaymentResponse);
+  rpc ProcessPayment(PaymentRequest) returns (PaymentResponse);
 }
 
 message PaymentRequest {
